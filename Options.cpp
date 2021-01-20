@@ -35,8 +35,13 @@ int main() {
 	if (var > 1) {
 		var++;
 	}
+	switch (var)
+	{
+	default:
+		var++;
+		break;
+	}
 	cout << var << endl;
 
 	return 0;
 }
-
