@@ -1,189 +1,70 @@
-﻿#include <iostream>
-using namespace std;
-
-int gun=4, shoot=5, shield = 7,hp=100,force, dexterity,intellect,endurance,charm,luck,clas,forceweap,distanceweap;
-
-int skill() {
-int skill;
-skill = (gun+shoot)/2;
-return skill;
-
-}
-
-int protection() {
-	int protection;
-	protection = shield * 8 / 10;
-	return protection;
-}
-
-int features() {
-	int features;
-	features = (force + dexterity + intellect + endurance + luck)/5;
-	return features;
-}
-
-int damage() {
-	int damage;
-	damage = skill()+ features() - protection();
-	return damage;
-}
-
-int life() {
-	hp = hp - damage();
-	if (hp > 0) {
-		cout << hp << endl;
-		return hp;
-	}
-	else {
-		hp = 0;
-		cout << hp << endl;
-		return hp;
-	}
-}
-
-
-int main() {
-	setlocale(0, "Rus");
-	cout << "Выберите 1 из 3х классов.На выбор есть: \n 1-Варвар \n 2-Лучник \n 3-Маг" << endl;
-	cin >> clas;
-	if (clas == 1) {
-		force = 10;
-		dexterity = 6;
-		intellect = 3;
-		endurance = 7;
-		charm = 3;
-		luck = 4;
-	}
-		else if (clas == 2)
-		{
-			force = 8;
-			dexterity = 10;
-			intellect = 7;
-			endurance = 7;
-			charm = 5;
-			luck = 6;
-		}
-		else if (clas == 3)
-		{
-			force = 8;
-			dexterity = 8;
-			intellect = 9;
-			endurance = 6;
-			charm = 7;
-			luck = 8;
-        }
-		else {
-		cout << "Вы промахнулись,попробуйте заново" << endl;
-	}
-	int weapon;
-	cout << "Выберите базовое оружие \n 1-Рапира.Ее мощность 6,дальность действия 1. \n 2-Катана.Ее мощность 5,дальность действия 2. \n 3-Арбалет. Его мощность 4,дальность действия 6." << endl;
-	cin >> weapon;
-	if (weapon == 1) {
-		forceweap = 6;
-		distanceweap = 1;
-	}
-	else if (weapon == 2) {
-		forceweap = 5;
-		distanceweap = 2;
-	}
-	else {
-		forceweap = 4;
-		distanceweap = 6;
-	}
-}
-	
 #include <iostream>
+#include <ctime>
 using namespace std;
 
-int hp = 100;
+int player_health = 100;
+int npc_health = 100;
 
-int skill() {
-int skill,gun=4,shoot=5;
-skill = (gun+shoot)/2;
-return skill;
-
+void npc_damage() {
+	srand(time(NULL));
+	int npc_damage;
+	npc_damage =rand() % 20+1;
+	player_health = player_health - npc_damage;
+	if (player_health < 0) {
+		player_health = 0;
+	}
 }
 
-int protection() {
-	int protection,shield=7;
-	protection = shield * 8 / 10;
-	return protection;
-}
-
-int features() {
-	int features;
-	int force, dexterity, intellect, endurance, charm, luck, clas, forceweap, distanceweap;
-	features = (force + dexterity + intellect + endurance + luck)/5;
-	return features;
-}
-
-int damage() {
-	int damage;
-	damage = skill()+ features() - protection();
-	return damage;
-}
-
-int life() {
-	hp = hp - damage();
-	if (hp > 0) {
-		cout << hp << endl;
-		return hp;
+void my_damage(int& distance) {
+	const int my_damage = 4;
+	int critical_hit;
+	if(distance>1){
+	srand(time(NULL));
+	critical_hit = rand() % 10 + 1;
+	if (critical_hit == 10) {
+		cout << "Вы сделали идеальный выстрел и нанесли критический урон варвару" << endl;
+		npc_health = npc_health - my_damage - 7;
 	}
 	else {
-		hp = 0;
-		cout << hp << endl;
-		return hp;
+		npc_health = npc_health - my_damage;
+	}
+	if (npc_health < 0) {
+		npc_health = 0;
+	}
+	}
+	else {
+		cout << "Вы не можете выстрелить,так как варвар вплотную возле вас.Вы отходите и наносите минимальный урон в 3 hp" << endl;
+		distance = 1;
+		npc_health = npc_health-3;
+		if (npc_health < 0) 
+			npc_health = 0;
 	}
 }
 
+void distance1(int& distance) {
+	if (distance > 1) {
+		distance = distance - 1;
+		cout << "Варвар еще на подходе и не наносит вам урон" << endl;
+	}
+	else {
+		npc_damage();
+	}
+}
 
 int main() {
 	setlocale(0, "Rus");
-	cout << "Выберите 1 из 3х классов.На выбор есть: \n 1-Варвар \n 2-Лучник \n 3-Маг" << endl;
-	cin >> clas;
-	if (clas == 1) {
-		force = 10;
-		dexterity = 6;
-		intellect = 3;
-		endurance = 7;
-		charm = 3;
-		luck = 4;
+	int distance = 15;
+	cout << "Здравствуйте! Вы попали на арену. Вы являетесь лучником,а ваш соперник варваром.\n Между вами есть дистанция. Вы можете одолеть варвара только на расстоянии,ведь если он подойдет к вам вплотную,он вас размажет как блоху! \n Удачи! " << endl;
+	cout << "Для начала игры нажмите Enter" << endl;
+	while (player_health > 0 &&  npc_health > 0) {
+		cin.get();
+		my_damage(distance);
+		distance1(distance);
+		cout << "Ваше здоровье равно = " << player_health << endl;
+		cout << "Здоровье вашего врага равно = " << npc_health << endl; 
 	}
-		else if (clas == 2)
-		{
-			force = 8;
-			dexterity = 10;
-			intellect = 7;
-			endurance = 7;
-			charm = 5;
-			luck = 6;
-		}
-		else if (clas == 3)
-		{
-			force = 8;
-			dexterity = 8;
-			intellect = 9;
-			endurance = 6;
-			charm = 7;
-			luck = 8;
-        }
-		else {
-		cout << "Вы промахнулись,попробуйте заново" << endl;
-	}
-	int weapon;
-	cout << "Выберите базовое оружие \n 1-Рапира.Ее мощность 6,дальность действия 1. \n 2-Катана.Ее мощность 5,дальность действия 2. \n 3-Арбалет. Его мощность 4,дальность действия 6." << endl;
-	cin >> weapon;
-	if (weapon == 1) {
-		forceweap = 6;
-		distanceweap = 1;
-	}
-	else if (weapon == 2) {
-		forceweap = 5;
-		distanceweap = 2;
-	}
-	else {
-		forceweap = 4;
-		distanceweap = 6;
-	}
-}
-	
+	if (player_health > 0)
+		cout << "Вы одержали победу,уничтожив варвара!" << endl;
+	else
+		cout << "Ни смотря ни на что варвар сокрушил вас как блоху,попробуйте сыграть еще раз!" << endl;
+}	
