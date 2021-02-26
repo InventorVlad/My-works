@@ -1,4 +1,4 @@
-﻿/*В этой программе создан класс weapon, описывающий поведение обыкновенного немагического оружия в игре.
+/*В этой программе создан класс weapon, описывающий поведение обыкновенного немагического оружия в игре.
 Задание: создать класс magic_weapon, являющийся наследником класса weapon.*/
 
 #include <iostream>
@@ -62,6 +62,20 @@ int weapon::get_weight() const { //функция-геттер для веса
 }
 
 //все геттеры определены, как константные методы, что позволяет обезопасить члены класса от нежелательных изменений
+void Ulta(int& damage){
+    damage = damage - 5;
+    cout << "ULTAAAAA" << endl;
+
+
+}
+
+
+
+
+
+
+
+
 void death(int player_hp, int enemy_hp) {
     if (player_hp < 0 && enemy_hp < 0) cout << "All die" << endl;
     else if (player_hp > 0 && enemy_hp < 0) cout << "You win" << endl;
@@ -79,17 +93,24 @@ int weapon::hit() {
 
 int main() {
     setlocale(0, "rus");
+    int start_clock, end_clock,time;
     weapon simple_iron_sword, players_BIG_sword(20); //создаем два объекта - два меча, себе и противнику
     weapon human_slayer(6,100,0,0,20), zhumernacht(50,100,0,1000,5);
     int enemy_health = 1000, player_health = 100; //здоровье для протагониста и для противника
 
     while (enemy_health > 0 && player_health > 0) { //ни один из нас не покинет поле боя, пока жив другой...
+        start_clock= clock();
         player_health = player_health - human_slayer.hit(); //противник наносит удар, уменьшается здоровье протагониста
         cin.get(); //программа ждет нажатия любой клавиши
         enemy_health = enemy_health - zhumernacht.hit(); //игрок бьет, уменьшается здоровье врага
         cout << "Enemy's health: " << enemy_health << endl;
         cout << "My health: " << player_health << endl;
         death(player_health, enemy_health);
+        end_clock = clock();
+        time =end_clock-start_clock;
+        if (time > 10) {
+            Ulta(player_health);
+        }
     }
 
     cout << "Simple sword condition: " << human_slayer.get_durability() - human_slayer.get_degradation() << endl;
