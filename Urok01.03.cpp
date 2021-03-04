@@ -18,12 +18,11 @@ using namespace std;
 	cout << *d << endl;
 }*/
 void foo(string *hello1) {
-	hello1 = NULL;
-	hello1 = new string("Hello world");
+	*hello1 = *new string("Hello world");
 }
 
 int main() {
-	string*a;
-	foo(a);
-		cout << *a << endl;
+	string a;
+	foo(&a);
+		cout << a << endl;
 }
