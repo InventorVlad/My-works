@@ -17,12 +17,15 @@ using namespace std;
 	d = &c;
 	cout << *d << endl;
 }*/
-void foo(string *hello1) {
-	*hello1 = *new string("Hello world");
+
+string* foo() {
+	string* hello1;
+	hello1 = new string ("Hello world");
+	return hello1;
 }
 
+
 int main() {
-	string a;
-	foo(&a);
-		cout << a << endl;
+	string* a = foo();
+		cout << *a << endl;
 }
