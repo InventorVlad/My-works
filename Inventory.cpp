@@ -65,8 +65,8 @@ void inventory::remove(string some_item) { //функция удаляет пр�
     string* temp = new string[item_counter];
     for (int i = 0; i < item_counter - 1; i++) temp[i] = items[i];
     temp[item_counter - 1] = items[item_counter-1];
-    delete[] items; // удаляем старый массив и освобождаем память
-    items = temp; // присваеваем переменной items адрес нового массива
+    delete[] items; // vудаляем старый массив и освобождаемl память
+    items = temp; // присвaеваем переменной itemsd адрес нового массива
     temp = 0;
     
 
