@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 
 // класс описывает простой инвентарь игрового персонажа
@@ -29,9 +29,9 @@ inventory::~inventory() { // деструктор; не забываем осв�
 
 void inventory::open() { // функция демонстрирует содержимое инвентаря
     for (int i = 0; i < item_counter; i++) {
-        cout << i+1 << " " << items[i] << endl;
+        cout << i + 1 << " " << items[i] << endl;
     }
-        cout << endl;
+    cout << endl;
 }
 
 void inventory::add(string some_item) { // функция позволяет добавить предмет в инвентарь
@@ -46,23 +46,31 @@ void inventory::add(string some_item) { // функция позволяет д�
 
 void inventory::remove(string some_item) { //функция удаляет предмет из инвентаря; если названного предмета в инвентаре нет, \ то функция ничего не делает
     int search;
-    for (int i = 0; i < item_counter - 1; i++) {
+    string temp1;
+    for (int i = 0; i < item_counter; i++) {
         if (items[i] == some_item) {
             search = i;
             break;
         }
     }
-    if (search != item_counter-1) {
+    if (search != item_counter - 1) {
         for (int i = search; i < item_counter - 1; i++) {
             items[i] = items[i + 1];
         }
     }
-    else {}
-    item_counter--; // количество предметов увеличивается на единицу
-    //string* temp = new string[item_counter]; // создается новый массив
+    else {
+        cout << "fsdf " << endl;
+    }
+    item_counter--; 
+    string* temp = new string[item_counter];
+    for (int i = 0; i < item_counter - 1; i++) temp[i] = items[i];
+    temp[item_counter - 1] = items[item_counter-1];
+    delete[] items; // удаляем старый массив и освобождаем память
+    items = temp; // присваеваем переменной items адрес нового массива
+    temp = 0;
+    
 
-    
-    
+
 
 }
 
@@ -75,6 +83,6 @@ int main() {
     my_inventory.open();
     my_inventory.add("Дриклабрус");
     my_inventory.open();
-    my_inventory.remove("oskolok");
+    my_inventory.remove("Дриклабрус");
     my_inventory.open();
 }
