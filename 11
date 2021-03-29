@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+class Abc {
+protected:
+	int b;
+
+private:
+	int a;
+
+public:
+	void set_a();
+	int get_a();
+};
+
+void Abc::set_a() {
+	a = 5;
+}
+
+int Abc::get_a() {
+	return a;
+}
+
+class EFG:public Abc {
+public:
+	int get_b();
+	void set_c();
+
+private:
+	int c;
+};
+
+void EFG::set_c() {
+	c = b;
+}
+
+int EFG::get_b() {
+	return b;
+}
+int main() {
+	EFG bbb;
+	int c;
+	bbb.set_c();
+	cout << bbb.get_b() << endl;
