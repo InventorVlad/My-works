@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    @keyframes example {
+        /* 0% {background-color: red;left:300px;top: 0px;}
+        10%{background-color: blue;left:300px;top: 400px;}
+        25%{background-color: coral;left:0px;top: 400px;}
+        50%{background-color: yellow;left:0px;top: 100px;}
+        100%{background-color: teal;left:0px;top: 0px;} */
+        0% {background-color:red; transform: rotate3d(1,1,0,360deg)}
+        
+        
+    }
+    #red{
+    background-color: red;
+    animation-name: example;
+    animation-duration: 5s;
+    animation-delay: 3s;
+    animation-direction: normal;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    position: absolute;
+    /* transform: skew(20deg,10deg); */
+    
+
+
+    }
+
+    .box{
+        height: 200px;
+        width: 200px;
+        margin: 20px 20px 20px 0;
+        
+
+    }
+    
+    #green{
+    background-color: green;
+    animation-name: example;
+    animation-duration: 5s;
+    transform-origin: 0% 0% 0%;
+    transform: rotateX(360deg);
+    
+    position:relative;
+    }
+    </style>
+
+</head>
+<body>
+    <div class="box" id="green"></div>
+    <div class="box"id="red"></div>
+</body>
+</html>
