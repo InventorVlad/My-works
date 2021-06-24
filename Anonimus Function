@@ -1,0 +1,15 @@
+    //Лямбда(анонимная функция)
+    void(*ptr)(int) = [](int x) {
+        cout << x * x << endl;
+    };
+    vector<string>names{
+   "John","Alex","Anna",
+   "Sam","John","Lily","Victoria"
+    };
+    for_each(names.begin(), names.end(), [](string& a) {
+        for (int i = 0; i < a.size(); i++)
+            a[i] = toupper(a[i]);
+
+        });
+}
+
