@@ -1,0 +1,17 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main() {
+    
+    vector<string>names{
+      "John","Alex","Anna",
+      "Sam","John","Lily","Victoria"
+    };
+    replace(names.begin(), names.end(), "John","Jax ");
+    for (string item : names)
+        cout << "Name: " << item << endl;
+}
