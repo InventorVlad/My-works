@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class User {
+    string login;
+    string password;
+public:
+    User(string login, string password)
+        :login(login), password(password){}
+    User();
+    string getPwd() { return password; }
+};
+
+
+
+
+int main() {
+    vector<User> users;
+    users.push_back(User("Vladislav", "Vladislav"));
+    users.push_back(User("Vladislav", "Vladislav"));
+    users.push_back(User("Vladislav", "Vladislav"));
+    users.push_back(User("Vladislav", "Vladislav"));
+    users.push_back(User("Vladislav", "Vladislav"));
+    users.push_back(User("Vladislav", "Vladislav"));
+    for_each(users.begin(), users.end(), [](User& u) {
+        if (u.getPwd().length() < 8) {
+            string generatePwd(int n = 10) {
+                string newpwd;
+                string s = "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM";
+                for (int i = 0; i < n; i++) {
+                    newpwd += s[rand() % s.length()];
+                }
+                return newpwd;
+
+            }
+        }
+
+
+        });
+}
