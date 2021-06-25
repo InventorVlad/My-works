@@ -1,0 +1,2 @@
+C:\Users\РожковскийВ\source\repos\SDP-202-3\ProjectX\x64\Debug\ProjectX.exe
+C:\Users\РожковскийВ\source\repos\SDP-202-3\ProjectX\x64\Debug\ProjectX.pdb
